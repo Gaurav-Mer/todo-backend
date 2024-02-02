@@ -36,6 +36,9 @@ app.use("/api/logout", logoutRoute);
 app.use("/api/uploadAvatar", uploadUserAvatar);
 app.use("/api/fetchProfileData", userData);
 app.use("/api/validateEmail", handleUserMail);
+app.get("/test", (req, res) => {
+    res.send({ name: "gaurav mer " })
+})
 app.get("/", (req, res) => res.type('html').send(html));
 
 
