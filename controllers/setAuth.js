@@ -3,7 +3,8 @@ const extractDataFromToken = require("../commonFunc/getToken");
 const setAuth = async (req, res) => {
     const { DO_NOT_SHARE } = req.cookies;
     const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log("current url is ", currentUrl);
+    const frontendUrl = req.get('referer') || 'Unknown';
+    console.log("current url is ", frontendUrl);
 
     let rData = {}
     if (DO_NOT_SHARE) {
