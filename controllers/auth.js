@@ -58,6 +58,10 @@ const testing = async (req, res) => {
 //  ---------------------LOGIC FOR THE LOGIN PURPOSE----------------------------------------
 const login = async (req, res) => {
     const { email, password } = req.body;
+    const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log("current url is as login", currentUrl);
+
+
     const isAlready = await UserModel.findOne({ email });
     if (!isAlready || isAlready === null) {
         return res.status(400).json({ msg: { email: "No user Found" } })
