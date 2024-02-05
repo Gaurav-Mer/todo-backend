@@ -76,7 +76,7 @@ const login = async (req, res) => {
 
         // Set the JWT in an HttpOnly cookie
         const oneHourFromNow = new Date(Date.now() + 7 * 60 * 60 * 1000); // 1 hour in milliseconds
-        res.cookie('DO_NOT_SHARE', token, { httpOnly: true, expires: oneHourFromNow, sameSite: 'None', secure: true });
+        res.cookie('DO_NOT_SHARE', token, { httpOnly: true, expires: oneHourFromNow, path: "/" });
         let userData = {};
         if (token) {
             const respData = await extractDataFromToken(token);
