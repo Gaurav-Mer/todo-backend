@@ -20,7 +20,8 @@ const handleUserMail = require("./routes/validateEmail.js");
 
 // app.use(cors());
 // app.use(cors({ credentials: true, origin: 'http://127.0.0.1:5173' }));
-app.use(cors({ credentials: true, origin: ["http://127.0.0.1:5173", "http://localhost:5173", "https://todo-front-end-three.vercel.app"] }));
+const allowedRoute = ["http://127.0.0.1:5173", "http://localhost:5173", "https://todo-front-end-three.vercel.app", "https://todo-front-end-three.vercel.app/"]
+app.use(cors({ credentials: true, origin: allowedRoute }));
 app.use(express.json()); // Middleware to parse JSON requests
 app.use(cookieParser()); //can perform action on user browers cookies
 
