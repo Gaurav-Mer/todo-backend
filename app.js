@@ -24,6 +24,7 @@ const allowedRoute = ["http://127.0.0.1:5173", "http://localhost:5173", "https:/
 app.use(cors({ credentials: true, origin: allowedRoute }));
 app.use(express.json()); // Middleware to parse JSON requests
 app.use(cookieParser()); //can perform action on user browers cookies
+app.set('trust proxy', true);
 
 
 const port = process.env.port || 3001;
