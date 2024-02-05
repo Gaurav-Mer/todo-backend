@@ -58,12 +58,6 @@ const testing = async (req, res) => {
 //  ---------------------LOGIC FOR THE LOGIN PURPOSE----------------------------------------
 const login = async (req, res) => {
     const { email, password } = req.body;
-    const protocol = req.get('X-Forwarded-Proto') || req.protocol;
-    const frontendUrl = `${protocol}://${req.get('host')}${req.originalUrl}`;
-
-    const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log("current url is as login", currentUrl, "&&&", frontendUrl);
-
 
     const isAlready = await UserModel.findOne({ email });
     if (!isAlready || isAlready === null) {
@@ -80,6 +74,7 @@ const login = async (req, res) => {
         // Set the JWT in an HttpOnly cookie
         const oneHourFromNow = new Date(Date.now() + 7 * 60 * 60 * 1000); // 1 hour in milliseconds
         res.cookie('DO_NOT_SHARE', token, { httpOnly: true, expires: oneHourFromNow, sameSite: 'None', secure: true });
+
         let userData = {};
         if (token) {
             const respData = await extractDataFromToken(token);
@@ -110,6 +105,8 @@ const logout = async (req, res) => {
     const resp = await res.cookie("DO_NOT_SHARE", "", {
         httpOnly: true,
         expires: new Date(0),
+        sameSite: "None",
+        secure: true
     });
     res.status(200).json({ success: true });
 }

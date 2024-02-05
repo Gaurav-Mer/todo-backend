@@ -20,12 +20,12 @@ const handleUserMail = require("./routes/validateEmail.js");
 
 // app.use(cors());
 // app.use(cors({ credentials: true, origin: 'http://127.0.0.1:5173' }));
-const allowedRoute = ["http://127.0.0.1:5173", "http://localhost:5173", "https://todo-front-end-three.vercel.app", "http://todo-front-end-three.vercel.app","https://todo-front-end-three.vercel.app/"]
+const allowedRoute = ["http://127.0.0.1:5173", "http://localhost:5173", "https://todo-front-end-three.vercel.app", "http://todo-front-end-three.vercel.app", "https://todo-front-end-three.vercel.app/"]
 app.use(cors({ credentials: true, origin: allowedRoute }));
 app.use(express.json()); // Middleware to parse JSON requests
 app.use(cookieParser()); //can perform action on user browers cookies
 app.set('trust proxy', true);
-
+// The line app.set('trust proxy', true); in Express is used to enable trust in certain proxy headers. When your Node.js application is running behind a proxy or a load balancer, the original information about the client's connection might be forwarded through headers. The trust proxy setting helps Express to properly interpret and use these headers.
 
 const port = process.env.port || 3001;
 app.use("/register", registerForm);
