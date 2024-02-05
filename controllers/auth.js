@@ -58,8 +58,11 @@ const testing = async (req, res) => {
 //  ---------------------LOGIC FOR THE LOGIN PURPOSE----------------------------------------
 const login = async (req, res) => {
     const { email, password } = req.body;
+    const protocol = req.get('X-Forwarded-Proto') || req.protocol;
+    const frontendUrl = `${protocol}://${req.get('host')}${req.originalUrl}`;
+
     const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log("current url is as login", currentUrl);
+    console.log("current url is as login", currentUrl, "&&&", frontendUrl);
 
 
     const isAlready = await UserModel.findOne({ email });
